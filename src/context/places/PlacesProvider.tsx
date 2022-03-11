@@ -33,9 +33,11 @@ export const PlacesProvider = ({ children }: Props) => {
     );
   }, []);
 
-  //TODO: minuto ->8:11
   const searchPlacesByTerm = async (query: string): Promise<Feature[]> => {
-    if (query.length === 0) return []; //todo: limpiar state
+    if (query.length === 0) {
+      dispatch({type: 'setPlaces', payload: []});
+      return [];
+    }
     if (!state.userLocation) throw new Error('No hay ubicacion del usaurio');
 
     dispatch({type: 'setLoadingPlaces'});
