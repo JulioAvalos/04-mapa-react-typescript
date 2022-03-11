@@ -1,15 +1,17 @@
-import { ChangeEvent, useRef } from 'react';
+import { ChangeEvent, useRef, useContext } from 'react';
+import { PlacesContext } from '../context/places/PlacesContext';
 
 export const SearchBar = () => {
   const debounceRef = useRef<NodeJS.Timeout>();
+
+  const { searchPlacesByTerm } = useContext(PlacesContext);
 
   const onQueryChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (debounceRef.current) clearTimeout(debounceRef.current);
 
     debounceRef.current = setTimeout(() => {
-      //todo: buscar la consulta
-      console.log('debounce value: ', event.target.value);
-    }, 1000);
+      searchPlacesByTerm(event.target.value);
+    }, 350);
   };
 
   return (
