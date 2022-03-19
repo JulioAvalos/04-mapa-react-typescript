@@ -119,8 +119,6 @@ export const MapProvider = ({ children }: Props) => {
       }
     };
 
-    //todo: remover polyline si existe
-
     if(state.map?.getLayer('RouteString')){
       state.map.removeLayer('RouteString');
       state.map.removeSource('RouteString');
